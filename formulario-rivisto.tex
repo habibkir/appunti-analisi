@@ -1,0 +1,281 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{titlesec}
+\usepackage{authblk}
+
+\title{18 fantastici e dove trovarli}
+\author{Sto Cazzo}
+\affil{Dipartimento di Matematica, Università della Vita}
+
+\begin{document}
+\maketitle
+\newpage
+
+\begin{flushright}
+  \hspace{-2cm}
+  \textsc{C'ha la mamma puttana} \\
+  \textit{Rodolfo ``Rodman'' Boccia}, de Poggilinis
+\end{flushright}
+
+\begin{flushright}
+  \hspace{-2cm}
+  \textsc{Sembra uno di quei documenti tristi da cui studi} \\
+  \textit{Mia sorella}, prima reazione a questo pdf
+\end{flushright}
+\tableofcontents
+\newpage
+
+\section{coefficienti binomiali}
+\begin{itemize}
+\item \textbf{Formula:}
+  \[ \binom{n}{k} = \frac{n!}{k!(n-k)!} \]
+
+\item \textbf{Casi particolari:}
+  \begin{align*}
+    \binom{n}{k} &= \binom{n}{n-k} \\
+    \binom{n}{n} &= \binom{n}{0} = 1 \\
+    \binom{n}{n-1} &= \binom{n}{1} = n
+  \end{align*}
+\end{itemize}
+
+\section{condizionate}
+\begin{itemize}
+\item \textbf{Formula}:
+  mettiemo $A$ e $B$ due eventi
+  \[ P(A|B) = \frac{P(A \cap B)}{P(B)} \]
+\item \textbf{Bayes}:
+  \[ P(B|A) = P(A|B) \frac{P(B)}{P(A)} \]
+\item \textbf{L'altro}:
+  \[ P(A,B) = P(A|B) P(B) \]
+\item \textbf{Con cui marginalizza così}: (quando fai le bernoulli condizionate)
+  \[ P(A) = \sum_b P(A,B = b) = \sum_b P(A|B = b) P(B = b) \]
+\end{itemize}
+
+\section{distribuzioni}
+
+\subsection{discrete}
+descritte da $\mathbb{P}(X = k)$
+
+\begin{itemize}
+  \item Bernoulli, lancio una moneta, 1 se testa, 0 se croce
+    \begin{itemize}
+    \item \textbf{Parametri}: $p$, la probabilità che esce testa
+    \item \textbf{Formula}:
+      \begin{align*}
+        \mathbb{P}(X = 1) &= p \\
+        \mathbb{P}(X = 0) &= 1-p
+      \end{align*}
+    \end{itemize}
+
+  \item Binomiale, lancio $n$ bernoulli \emph{i.i.d.} con lo stesso parametro, conta le teste
+    \begin{itemize}
+    \item \textbf{Parametri}: $n$, il numero di bernoulli che lancio; $p$, il parametro delle bernoulli
+    \item \textbf{Formula}:
+      \[ \mathbb{P}(X = k) = \binom{n}{k} p^k {(1-p)}^{n-k} \]
+    \end{itemize}
+
+  \item Geometrica, lancio bernoulli costantemente finchè una non fa $1$, la prima era la k-esima per quale k?
+    \begin{itemize}
+    \item \textbf{Parametri}: $p$, il parametro della bernoulli sottostante
+    \item \textbf{Formula}:
+      \[ \mathbb{P}(X = k) = p{(1-p)}^{k-1} \]
+    \end{itemize}
+
+  \item Geometrica Modificata, stessa cosa della geometrica ma parto da 0 e non da 1
+    \begin{itemize}
+    \item \textbf{Parametri}: $p$, il parametro della bernoulli sottostante
+    \item \textbf{Formula}:
+      \[ \mathbb{P}(X = k) = p {(1-p)}^k \]
+    \end{itemize}
+
+  \item Poisson
+    \begin{itemize}
+    \item \textbf{Parametri}: $\lambda$ (tasso\footnote{wikipedia ipse dixit})
+    \item \textbf{Formula}:
+      \[ \mathbb{P}(X = k) = e^{-\lambda} \frac{\lambda^k}{k!} \]
+    \end{itemize}
+\end{itemize}
+
+\subsection{continue}
+descritte da
+\begin{itemize}
+\item \textbf{Legge}: $F_X (t) := \mathbb{P}(X \leq t)$
+\item \textbf{Densità}: $f_X (t) := \frac{d}{dt}F_X(t)$
+\end{itemize}
+
+di queste abbiamo
+\begin{itemize}
+\item Uniforme
+  \begin{itemize}
+  \item \textbf{Parametri}: $a$, inizio intervallo; $b$, fine intervallo
+  \item \textbf{Densità}:
+    \[ f_X(t) = \begin{cases}
+      \frac{1}{b-a} &\text{ se } t \in (a,b) \\
+      0 &\text{ altrimenti }
+    \end{cases}
+    \]
+  \item \textbf{Legge}:
+    \[ F_X(t) = \begin{cases}
+      0 & \text{ se } t \leq a \\
+      \frac{t-a}{b-a} & \text{ se } t \in (a, b) \\
+      1 & \text{ se } t \geq b
+    \end{cases}
+    \]
+  \end{itemize}
+
+\item Esponenziale
+  \begin{itemize}
+  \item \textbf{Parametri}: $\lambda$, la lambda
+  \item \textbf{Densità}:
+    \[ f_X(t) = e^{-\lambda x} \]
+  \item \textbf{Legge}:
+    \[ F_X(t) = 1 - e^{-\lambda x}\]
+  \end{itemize}
+
+\item Gaussiana
+  \begin{itemize}
+  \item \textbf{Parametri}: $\mu$, la media; $\sigma^2$, la varianza
+  \item \textbf{Densità}: \\
+    \[
+    f_X(t) = \frac{1}{\sigma \sqrt{2 \pi}} e^{-\frac{1}{2} {(\frac{\mu - t}{\sigma})}^2}
+    \]
+    che nel caso standard ($\sigma = 1, \mu = 0$), fa
+    \[
+    f(t) = \frac{1}{\sqrt{\pi}} e^{-\frac{t^2}{2}}
+    \]
+  \item \textbf{Legge}: Lasciata come esercizio al lettore
+  \end{itemize}
+
+\item varie stronzate della Gaussiana includono
+  \begin{itemize}
+  \item Gaussiana non standard in funzione di $N(0,1)$ (traslazione affine)
+    \[
+    \alpha N(0,1) + \beta = N(\beta, \alpha^2)
+    \]
+  \item Quella standard ($N(0,1)$) è pari, quindi, detta $\Phi$, la sua distribuzione/legge
+    \[
+    \Phi(-x) = 1-\Phi(x) \text{ (questa è ovunque)}
+    \]
+  \end{itemize}
+\end{itemize}
+
+\subsection{modifiche di va}
+\begin{itemize}
+\item Affine \textit{(el Formulino)} \\
+  \begin{align*}
+    Y &= \alpha X + \beta \\
+    f_Y &= \frac{1}{\lvert \alpha \rvert} f_x (\frac{x - \beta}{\alpha})
+  \end{align*}
+\item Quadrato \textit{(el Formulero)} \\
+  \begin{align*}
+    Y &= X^2 \\
+    f_Y &= \frac{1}{2\sqrt{x}} (f(\sqrt{x}) + f(-\sqrt{x}))
+  \end{align*}
+\end{itemize}
+
+\section{stronzate varie}
+\subsection{
+  mancanza di memoria}
+una va è senza memoria quando il comportamento passato di questa può essere bellamente ignorato nel determinare il suo comportamento futuro
+
+la formula è che, (con $\alpha \geq \beta$, di solito)
+\begin{align*}
+  \mathbb{P}(X > \alpha | X > \beta) &= \mathbb{P}(X > (\alpha - \beta)) \\
+  \mathbb{P}(X = \alpha | X > \beta) &= \mathbb{P}(X = (\alpha - \beta)) \\
+  \mathbb{P}(X < \alpha | X > \beta) &= \mathbb{P}(X < (\alpha - \beta))
+\end{align*}
+
+godono di questa proprietà le distribuzioni
+\begin{itemize}
+  \item Esponenziale
+  \item Geometrica
+  \item Geometrica modificata
+\end{itemize}
+
+\section{sono solo formulette}
+\begin{itemize}
+\item \textbf{Valore atteso}:
+
+  \begin{itemize}
+    \item Variabili aleatorie discrete
+      \[\mathbb{E}[X] = \sum_{x \in \{valori\ assumibili\ da\ X\}} x \mathbb{P}(X = x) \]
+    \item Variabili aleatorie continue
+      \[\mathbb{E}[X] = \int_{x \in \{valori\ assumibili\ da\ X\}} x f_X(x) dx \]
+  \end{itemize}
+\item \textbf{Varianza}:
+  \[Var[X] = \mathbb{E}[X^2] - {(\mathbb{E}[X])}^2 \]
+\end{itemize}
+
+\section{procedure esercizi}
+\begin{flushright}
+  \hspace{-2cm}
+  \textsc{Questa è una procedura del tutto sistematica} \\
+  \textit{San Giovanni Battistelli} \\
+  \vspace{0.5cm}
+  \textsc{Eh, mica tanto} \\
+  \textit{Rodolfo ``Rodman'' Boccia}
+\end{flushright}
+
+\subsection{urne e dadi}
+\begin{align*}
+  P(quella\ faccia) &\times P(estrazione\ data\ quella\ faccia) \\
+  P(altra\ faccia) &\times P(estrazione\ data\ altra\ faccia)
+\end{align*}
+per la probabilità dell'estrazione fai
+\subsubsection{con un solo colore}
+\begin{itemize}
+\item \textbf{Senza reimbussolamento}
+  \[
+  \frac{casi\ possibili}{casi\ totali} =
+  \frac{\binom{n.\ quel\ colore}{n.\ estratte}}{\binom{tutta\ urna}{n.\ estratte}}
+  \]
+\item \textbf{Con reimbussolamento}
+  \[
+  {P(viene\ quella)}^{volte\ che\ estrai}
+  \]
+\end{itemize}
+
+\subsubsection{con più colori}
+\begin{itemize}
+  \item \textbf{Senza reimbussolamento}
+  \[
+    \frac{casi\ possibili}{casi\ totali} =
+    \frac{
+      \binom{n.\ quel\ colore}{n.\ estratte\ quel\ colore}
+      \binom{n.\ altro\ colore}{n.\ estratte\ altro\ colore}
+      \binom{n.\ altro\ colore\ ancora}{n.\ estratte\ altro\ colore\ ancora}
+      \ldots
+    }
+    {\binom{tutta\ urna}{n.\ estratte}}
+  \]
+  \item \textbf{Con reimbussolamento}
+    \[
+      (\prod_{i} P(viene\ colore_i)^{volte\ che\ estrai\ colore_i} )
+      \times\ binomiale\ per\ far\ tornare
+    \]
+\end{itemize}
+
+il binomiale è per mettere tutti gli ordini in cui possono uscirti i colori, se hai due colori, estratti $a$ e $b$ volte, allora il binomiale viene
+\[\binom{a+b}{b}\]
+se hai tre colori estratti $a$, $b$, e $c$ volte, allora il binomiale viene
+\[\binom{a+b+c}{c} \binom{a+b}{b}\]
+
+\subsubsection{al contrario}
+fai con le condizionate, vaffanculo
+\[P(testa|estrazione) = \frac{P(testa\ e\ estrazione)}{P(dell'intero\ esperimento)
+  \footnote{vale a dire, la P che hai ottenuto dall'esercizio prima}}\]
+
+
+\subsection{marginalizzazione}
+se ho
+\[P(X,Y) = <qualche\ funzione\ di\ X,Y>\]
+allora
+\begin{align*}
+  P(X) &= \int_{y} P(X,Y) dy \\
+  P(Y) &= \int_{x} P(X,Y) dx
+\end{align*}
+
+\end{document}
